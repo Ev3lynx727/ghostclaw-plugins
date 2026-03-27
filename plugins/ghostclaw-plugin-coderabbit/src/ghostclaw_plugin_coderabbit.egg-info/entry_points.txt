@@ -1,0 +1,2 @@
+[ghostclaw.plugins]
+coderabbit = ghostclaw_plugin_coderabit.plugin:CustomAdapter

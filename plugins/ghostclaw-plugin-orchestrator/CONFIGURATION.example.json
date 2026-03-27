@@ -1,0 +1,71 @@
+# Ghost Orchestrator Configuration Example
+# Copy this into your ~/.ghostclaw/ghostclaw.json under the "orchestrator" key.
+
+# ==================
+# Planning Strategy
+# ==================
+# Choose how the orchestrator selects plugins:
+# - false: vector similarity + heuristics (no LLM)
+# - true: use LLM to create custom plan (requires API key)
+use_llm: false
+
+# LLM model identifier (when use_llm=true)
+# For OpenRouter: "openrouter/anthropic/claude-3-sonnet"
+# For OpenAI: "gpt-4", "gpt-3.5-turbo"
+# For local: "ollama/llama2" etc. (requires compatible base_url)
+llm_model: "openrouter/anthropic/claude-3-sonnet"
+
+# For OpenRouter, set environment variable:
+#   export OPENROUTER_API_KEY="your_key_here"
+# For OpenAI, set:
+#   export OPENAI_API_KEY="sk-..."
+# (Can also be set in config as 'llm_api_key', but env var recommended)
+
+# ==================
+# Vector + Heuristics (use_llm=false)
+# ==================
+# Weights for plugin scoring (must sum to 1.0)
+vector_weight: 0.7      # 70% from QMD similarity (requires Ghostclaw use_qmd=true)
+heuristics_weight: 0.3  # 30% from rule-based heuristics
+
+# How many past analysis runs to consider for vector scoring
+plugin_history_lookback: 50
+
+# ==================
+# Execution
+# ==================
+# Maximum plugins to execute (safety limit)
+max_plugins: 8
+
+# How many plugins to run in parallel (async concurrency)
+max_concurrent_plugins: 4
+
+# ==================
+# Plan Caching
+# ==================
+# Cache computed plans to avoid re-planning on unchanged repos
+enable_plan_cache: true
+plan_cache_ttl_hours: 24  # 0 = never expire
+plan_cache_file: null     # null = <repo>/.ghostclaw/storage/orchestrator_plan_cache.json
+
+# ---
+# Example full config in ~/.ghostclaw/ghostclaw.json:
+#
+# {
+#   "use_qmd": true,
+#   "orchestrator": {
+#     "use_llm": false,
+#     "max_plugins": 5,
+#     "enable_plan_cache": true,
+#     "plan_cache_ttl_hours": 24
+#   }
+# }
+#
+# With LLM:
+# {
+#   "orchestrator": {
+#     "use_llm": true,
+#     "llm_model": "openrouter/anthropic/claude-3-sonnet",
+#     "max_plugins": 5
+#   }
+# }

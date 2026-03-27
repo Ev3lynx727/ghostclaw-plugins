@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/ghostclaw_plugin_coderabbit.egg-info/PKG-INFO
+src/ghostclaw_plugin_coderabbit.egg-info/SOURCES.txt
+src/ghostclaw_plugin_coderabbit.egg-info/dependency_links.txt
+src/ghostclaw_plugin_coderabbit.egg-info/entry_points.txt
+src/ghostclaw_plugin_coderabbit.egg-info/requires.txt
+src/ghostclaw_plugin_coderabbit.egg-info/top_level.txt
+src/ghostclaw_plugin_coderabit/__init__.py
+src/ghostclaw_plugin_coderabit/plugin.py
+tests/test_plugin.py

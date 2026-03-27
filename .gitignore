@@ -1,0 +1,29 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+.idea/
+*.swp
+*.swo
+
+# Project-specific
+results/
+benchmarks/data/*.json
+!.gitkeep
+.ghostclaw/
+.pyscn/
+.vscode/
+node_modules/
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Agent-specific
+.drafts/
+.memory/

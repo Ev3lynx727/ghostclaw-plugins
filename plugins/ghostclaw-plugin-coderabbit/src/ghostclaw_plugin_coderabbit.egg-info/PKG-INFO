@@ -1,0 +1,127 @@
+Metadata-Version: 2.4
+Name: ghostclaw-plugin-coderabbit
+Version: 0.1.0
+Summary: Ghostclaw plugin integrating CodeRabbit AI code review
+Author-email: Ghostclaw Team <team@ghostclaw.ai>
+License: MIT
+Keywords: ghostclaw,plugin,coderabbit,ai,code-review
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.9
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Requires-Python: >=3.9
+Description-Content-Type: text/markdown
+Requires-Dist: ghostclaw>=0.2.0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+
+# Ghostclaw CodeRabbit Plugin
+
+Integrates [CodeRabbit](https://coderabbit.ai) AI-powered code review into Ghostclaw.
+
+> **Note:** This plugin wraps the `coderabbit` CLI. You need a valid API key and a CodeRabbit account.
+
+## Quick Start
+
+### 1. Install CodeRabbit CLI
+
+```bash
+# Install via npm or pip (adjust as needed)
+npm install -g coderabbit
+# or
+pip install coderabbit-cli
+```
+
+Verify:
+
+```bash
+coderabbit --version
+```
+
+### 2. Set API key
+
+```bash
+export CODERABBIT_API_KEY="your-api-key-here"
+```
+
+Add to your `~/.bashrc` or `~/.zshrc` for persistence.
+
+### 3. Install the plugin in your repo
+
+```bash
+# From this directory (ghostclaw-experimental/ghostclaw-plugin-coderabbit)
+# Copy to your repo's plugins directory:
+mkdir -p /path/to/your/repo/.ghostclaw/plugins
+cp -r . /path/to/your/repo/.ghostclaw/plugins/coderabbit
+```
+
+Or symlink for development:
+
+```bash
+ln -s $(pwd) /path/to/your/repo/.ghostclaw/plugins/coderabbit
+```
+
+### 4. Run Ghostclaw analysis
+
+```bash
+cd /path/to/your/repo
+ghostclaw analyze . --no-ai   # add --verbose to see more
+```
+
+The CodeRabbit plugin will run automatically and its findings will appear in the Issues and Red Flags sections.
+
+## How It Works
+
+The plugin:
+1. Checks that `coderabbit` CLI is installed (`is_available`)
+2. Detects the repository's base branch (main/master)
+3. Runs `coderabbit review --plain --no-color --type all --base <branch> --cwd <repo>`
+4. Parses the plain-text output into Ghostclaw issues
+5. Returns findings and any error red flags
+
+## Configuration
+
+No special config needed. The plugin respects:
+- `CODERABBIT_API_KEY` environment variable (required)
+- Standard git branch detection (main, master)
+
+## Output Format
+
+CodeRabbit issues are parsed from the plain text output. Each finding includes:
+- `file_path`: affected file
+- `line_start` / `line_end`: line numbers if available
+- `title`: brief description
+- `message`: full comment (including prompt for AI agent)
+- `severity`: mapped from CodeRabbit type (security→high, bug→medium, potential_issue→low, etc.)
+
+## Troubleshooting
+
+**Rate limit exceeded**: Wait a few minutes; CodeRabbit has usage limits.
+
+**Git diff errors**: The plugin uses `--type all` and attempts to auto-detect a base branch. If your repo has an unusual branch structure, you can modify the plugin's `_detect_base_branch` method.
+
+**No issues found**: CodeRabbit may not flag anything if the codebase is clean or if the review failed early (check Red Flags in the full report).
+
+## Development
+
+This plugin inherits from `MetricAdapter` and implements:
+- `get_metadata()` — plugin metadata
+- `is_available()` — checks `coderabbit --version`
+- `ghost_analyze(root, files)` — runs analysis and returns findings dict
+- `ghost_get_metadata()` — hook for registry
+
+Test locally:
+
+```bash
+pytest tests/
+```
+
+## License
+
+MIT

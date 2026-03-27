@@ -1,0 +1,55 @@
+# pyproject.toml — Ghostclaw Plugin Template
+
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ghostclaw-plugin-bandit"
+version = "0.1.0"
+description = "Ghostclaw plugin integrating Bandit Python security scanner"
+readme = "README.md"
+requires-python = ">=3.9"
+license = {text = "MIT"}
+authors = [{name="Ghostclaw Team", email="team@ghostclaw.ai"}]
+keywords = ["ghostclaw", "plugin", "bandit", "security", "static-analysis"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Security",
+]
+dependencies = [
+    "ghostclaw>=0.2.0",
+    "bandit>=1.7.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov",
+    "black",
+    "ruff",
+]
+
+[project.entry-points."ghostclaw.plugins"]
+bandit = "ghostclaw_plugin_bandit:BanditPlugin"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ["py39"]
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "N", "UP", "BLE", "B", "A", "C4", "DTZ", "T10", "EM", "EXE", "ISC", "ICN", "G", "PIE", "PT", "Q", "RSE", "RET", "SIM", "TCH", "ARG", "PTH", "PD", "PLC", "PLE", "PLR", "PLW", "RUF"]
+ignore = []

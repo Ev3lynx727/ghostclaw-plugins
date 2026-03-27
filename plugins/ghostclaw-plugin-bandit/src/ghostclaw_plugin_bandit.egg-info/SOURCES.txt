@@ -1,0 +1,11 @@
+README.md
+pyproject.toml
+src/ghostclaw_plugin_bandit/__init__.py
+src/ghostclaw_plugin_bandit.egg-info/PKG-INFO
+src/ghostclaw_plugin_bandit.egg-info/SOURCES.txt
+src/ghostclaw_plugin_bandit.egg-info/dependency_links.txt
+src/ghostclaw_plugin_bandit.egg-info/entry_points.txt
+src/ghostclaw_plugin_bandit.egg-info/requires.txt
+src/ghostclaw_plugin_bandit.egg-info/top_level.txt
+tests/test_bandit.py
+tests/test_plugin.py

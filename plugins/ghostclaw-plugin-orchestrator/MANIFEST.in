@@ -1,0 +1,25 @@
+# Include documentation and config examples
+include README.md
+include LICENSE
+include CONFIGURATION.example.json
+include REVIEW.md
+
+# Include tests
+recursive-include tests *
+
+# Include benchmark scripts (but not their data/cache)
+recursive-include benchmark *.py *.sh *.txt *.md
+prune benchmark/.ghostclaw
+
+# Exclude development and generated files
+exclude verify.py
+exclude TODO.md
+exclude PROJECT_SYMBOLS.md
+
+# Prune caches and build artifacts
+prune .ghostclaw
+prune .pyscn
+prune .pytest_cache
+prune .ruff_cache
+prune .benchmarks
+prune .drafts

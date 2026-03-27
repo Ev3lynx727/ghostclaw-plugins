@@ -1,0 +1,70 @@
+[build-system]
+requires = ["setuptools>=61.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "ghost-orchestrator"
+version = "0.1.2a1"
+description = "Experimental smart routing and LLM-powered orchestration for Ghostclaw analysis"
+readme = "README.md"
+requires-python = ">=3.9"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [
+    {name = "Ghostclaw Experimental Team"}
+]
+keywords = ["static-analysis", "ai", "orchestration", "ghostclaw"]
+classifiers = [
+    "Development Status :: 3 - Alpha",
+    "Intended Audience :: Developers",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.9",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Quality Assurance",
+]
+dependencies = [
+    "ghostclaw>=0.2.1b0",  # Core with QMD support
+    "pydantic>=2.0",
+    "rich>=13.0",  # For pretty console output
+    "httpx>=0.28.0",  # Async HTTP client for LLM APIs
+    "tenacity>=8.0",  # Retry logic
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-asyncio>=0.21",
+    "black>=23.0",
+    "ruff>=0.1.0",
+    "mypy>=1.0",
+]
+llm = [
+    "openai>=1.0",  # If using OpenAI for planning
+    "anthropic>=0.18",  # If using Anthropic
+]
+
+[project.entry-points."ghostclaw.plugins"]
+"orchestrator" = "ghost_orchestrator.plugin:OrchestratorPlugin"
+
+[tool.setuptools]
+package-dir = {"" = "src"}
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.black]
+line-length = 88
+target-version = ['py39']
+
+[tool.ruff]
+line-length = 88
+select = ["E", "F", "W", "I", "C", "B", "UP"]
+
+[tool.mypy]
+python_version = "3.9"
+warn_return_any = true
+warn_unused_configs = true
+disallow_untyped_defs = true
+disallow_incomplete_defs = true

@@ -1,0 +1,2 @@
+[ghostclaw.plugins]
+bandit = ghostclaw_plugin_bandit:BanditPlugin
