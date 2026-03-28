@@ -19,6 +19,16 @@ benchmarks/data/*.json
 .pyscn/
 .vscode/
 node_modules/
+.benchmarks/
+.codeguardian/
+.logfire/
+.ruff_cache/
+.bandit_cache/
+.coderabbit_cache/
+.memory/
+.venv/
+.venv-test/
+
 
 # OS
 .DS_Store
