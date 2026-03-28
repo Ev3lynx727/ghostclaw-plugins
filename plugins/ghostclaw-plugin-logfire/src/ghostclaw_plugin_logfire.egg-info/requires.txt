@@ -1,0 +1,10 @@
+ghostclaw>=0.2.1b0
+
+[dev]
+pytest>=7.0
+pytest-cov
+black
+ruff
+
+[logfire]
+logfire>=2.0.0

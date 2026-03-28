@@ -1,0 +1,149 @@
+Metadata-Version: 2.4
+Name: ghostclaw-plugin-logfire
+Version: 0.1.0
+Summary: Ghostclaw plugin for analyzing Pydantic Logfire observability integration
+Author-email: Ghostclaw Team <team@ghostclaw.ai>
+License: MIT
+Keywords: ghostclaw,plugin,logfire,observability,pydantic,opentelemetry
+Classifier: Development Status :: 3 - Alpha
+Classifier: Intended Audience :: Developers
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Programming Language :: Python :: 3
+Classifier: Programming Language :: Python :: 3.10
+Classifier: Programming Language :: Python :: 3.11
+Classifier: Programming Language :: Python :: 3.12
+Classifier: Topic :: Software Development :: Testing
+Classifier: Topic :: System :: Monitoring
+Requires-Python: >=3.10
+Description-Content-Type: text/markdown
+Requires-Dist: ghostclaw>=0.2.1b0
+Provides-Extra: dev
+Requires-Dist: pytest>=7.0; extra == "dev"
+Requires-Dist: pytest-cov; extra == "dev"
+Requires-Dist: black; extra == "dev"
+Requires-Dist: ruff; extra == "dev"
+Provides-Extra: logfire
+Requires-Dist: logfire>=2.0.0; extra == "logfire"
+
+# Ghostclaw Plugin: Logfire
+
+Analyzes Python codebases for [Pydantic Logfire](https://logfire.pydantic.dev) observability integration.
+
+## Features
+
+- **Configuration Analysis** — Detects if Logfire is properly configured
+- **Instrumentation Coverage** — Identifies un-instrumented packages (FastAPI, SQLAlchemy, etc.)
+- **Pattern Detection** — Finds best practices and anti-patterns
+- **Security Scanning** — Flags hardcoded tokens/API keys
+
+## Installation
+
+```bash
+cd ghostclaw-plugin-logfire
+pip install -e .
+```
+
+## Usage
+
+```bash
+# With auto-discovery
+cd /your/repo
+ghostclaw analyze . --no-ai
+
+# Or manually
+ghostclaw analyze . --plugins logfire
+```
+
+## Configuration
+
+Add to `.ghostclaw.json` or `opencode.jsonc`:
+
+```json
+{
+  "mcp": {
+    "plugins": {
+      "logfire": {
+        "check_config": true,
+        "check_instrumentation": true,
+        "required_integrations": ["fastapi", "sqlalchemy"]
+      }
+    }
+  }
+}
+```
+
+### Options
+
+| Option | Type | Default | Description |
+|--------|------|---------|-------------|
+| `check_config` | bool | `true` | Check for proper `logfire.configure()` setup |
+| `check_instrumentation` | bool | `true` | Check for `instrument_*()` coverage |
+| `required_integrations` | list | `[]` | List of integrations that must be instrumented |
+
+## Detected Issues
+
+### Configuration Issues
+
+| Rule ID | Severity | Description |
+|---------|----------|-------------|
+| `LOGFIRE_NOT_CONFIGURED` | high | Logfire imported but `configure()` not called |
+| `LOGFIRE_LOCAL_MODE` | info | Running with `send_to_logfire=False` |
+
+### Instrumentation Issues
+
+| Rule ID | Severity | Description |
+|---------|----------|-------------|
+| `LOGFIRE_UNINSTRUMENTED_PACKAGE` | medium | Package imported but not instrumented |
+| `LOGFIRE_MISSING_INTEGRATION` | medium | Required integration not found |
+
+### Pattern Issues
+
+| Rule ID | Severity | Description |
+|---------|----------|-------------|
+| `LOGFIRE_EMPTY_SPAN_NAME` | low | Span created with empty name |
+
+### Security Issues (Red Flags)
+
+| Rule ID | Severity | Description |
+|---------|----------|-------------|
+| Hardcoded Token | critical | API key/token found in source code |
+
+## Supported Instrumentations
+
+The plugin detects these Logfire instrumentations:
+
+- `instrument_fastapi`
+- `instrument_django`
+- `instrument_flask`
+- `instrument_sqlalchemy`
+- `instrument_httpx`
+- `instrument_requests`
+- `instrument_openai`
+- `instrument_anthropic`
+- `instrument_asyncpg`
+- `instrument_redis`
+- `instrument_celery`
+- `instrument_pydantic_ai`
+- `instrument_sqlite3`
+- `instrument_psycopg`
+- `instrument_pymongo`
+- `instrument_structlog`
+- `instrument_loguru`
+
+## Development
+
+```bash
+# Install dev dependencies
+pip install -e ".[dev]"
+
+# Run tests
+pytest tests/ -v
+
+# Run linting
+ruff check src/
+black --check src/
+```
+
+## License
+
+MIT

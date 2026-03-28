@@ -8,7 +8,8 @@
 ## 📦 Contents
 
 ### Templates
-- `templates/plugin-template/` — Generic boilerplate for any Ghostclaw plugin
+
+- `plugins/plugin-template/` — Generic boilerplate for any Ghostclaw plugin
   - Complete `pyproject.toml` with entry points
   - Example `plugin.py` inheriting from `PluginBase`
   - Tests and README
@@ -35,6 +36,7 @@
 ## 📚 Documentation
 
 See **[PLUGINS.md](PLUGINS.md)** for comprehensive guides on:
+
 - Plugin architecture and structure
 - Two discovery methods (pip entry points vs local copy)
 - Step-by-step development workflow
@@ -48,7 +50,7 @@ Quick commands:
 ghostclaw plugins scaffold myplugin   # creates .ghostclaw/plugins/myplugin/
 
 # Install a plugin for global/pip-based discovery
-cd ghostclaw-plugin-coderabbit
+cd plugins/ghostclaw-plugin-coderabbit
 pip install -e .
 
 # List discovered plugins
@@ -74,24 +76,27 @@ ghostclaw analyze . --no-ai
 
 ## 🧪 How to Use
 
-### Start a new plugin:
+### Start a new plugin
+
 ```bash
 # Option 1: Copy template manually
-cp -r templates/plugin-template ghostclaw-plugin-mytool
+cp -r plugins/plugin-template ghostclaw-plugin-mytool
 # Then edit files (rename package, implement analyze())
 
 # Option 2: Use the plugins-builder skill (if integrated in your agent)
 # Say: "create a ghostclaw plugin named ghostclaw-plugin-mytool"
 ```
 
-### Test a plugin:
+### Test a plugin
+
 ```bash
-cd ghostclaw-plugin-mytool
+cd plugins/ghostclaw-plugin-mytool
 pip install -e .
 ghostclaw analyze /path/to/repo --plugins ghostclaw-plugin-mytool
 ```
 
-### Share:
+### Share
+
 - Push to GitHub (public or private)
 - Optionally publish to PyPI
 - Announce in Ghostclaw discussions
@@ -108,6 +113,7 @@ Long-term: `MEMORY.md` (create if needed)
 ## 🎯 Mission
 
 Seed the Ghostclaw plugin ecosystem with practical integrations:
+
 - Security (Bandit, Semgrep)
 - Quality (CodeRabit, Pylint, Radon)
 - Compliance (OWASP, SPDX SBOM)

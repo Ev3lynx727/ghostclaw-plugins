@@ -7,9 +7,9 @@ name = "ghost-orchestrator-demo"
 version = "0.1.0"
 description = "Minimal test plugin for Ghostclaw orchestrator"
 authors = [{name = "Test"}]
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 dependencies = [
-    "ghostclaw>=0.2.2a0",
+    "ghostclaw>=0.2.1b0",
 ]
 
 [project.entry-points."ghostclaw.plugins"]

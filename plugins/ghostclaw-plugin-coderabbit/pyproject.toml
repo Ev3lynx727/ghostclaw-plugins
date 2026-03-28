@@ -9,7 +9,7 @@ name = "ghostclaw-plugin-coderabbit"
 version = "0.1.0"
 description = "Ghostclaw plugin integrating CodeRabbit AI code review"
 readme = "README.md"
-requires-python = ">=3.9"
+requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name="Ghostclaw Team", email="team@ghostclaw.ai"}]
 keywords = ["ghostclaw", "plugin", "coderabbit", "ai", "code-review"]
@@ -23,7 +23,7 @@ classifiers = [
     "Programming Language :: Python :: 3.11",
 ]
 dependencies = [
-    "ghostclaw>=0.2.0",
+    "ghostclaw>=0.2.1b0",
     # CodeRabbit CLI is external, not a Python dependency
 ]
 

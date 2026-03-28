@@ -26,7 +26,7 @@ create a ghostclaw plugin named ghostclaw-plugin-<name>
 
 This generates:
 ```
-ghostclaw-plugin-<name>/
+plugins/ghostclaw-plugin-<name>/
 ├── README.md
 ├── pyproject.toml
 ├── src/
@@ -70,7 +70,7 @@ Custom analysis logic that doesn't wrap an external tool.
 ## Step 4: Test Locally
 
 ```bash
-cd ghostclaw-plugin-<name>
+cd plugins/ghostclaw-plugin-<name>
 pip install -e .
 # In a separate repo with Ghostclaw installed:
 ghostclaw analyze . --plugins ghostclaw-plugin-<name>

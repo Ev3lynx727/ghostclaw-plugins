@@ -1,0 +1,14 @@
+README.md
+pyproject.toml
+src/ghostclaw_plugin_logfire/__init__.py
+src/ghostclaw_plugin_logfire.egg-info/PKG-INFO
+src/ghostclaw_plugin_logfire.egg-info/SOURCES.txt
+src/ghostclaw_plugin_logfire.egg-info/dependency_links.txt
+src/ghostclaw_plugin_logfire.egg-info/entry_points.txt
+src/ghostclaw_plugin_logfire.egg-info/requires.txt
+src/ghostclaw_plugin_logfire.egg-info/top_level.txt
+src/ghostclaw_plugin_logfire/analyzers/__init__.py
+src/ghostclaw_plugin_logfire/analyzers/config.py
+src/ghostclaw_plugin_logfire/analyzers/instrumentation.py
+src/ghostclaw_plugin_logfire/analyzers/patterns.py
+tests/test_plugin.py

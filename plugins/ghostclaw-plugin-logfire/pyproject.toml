@@ -1,31 +1,31 @@
-# pyproject.toml — Ghostclaw Plugin Template
+# pyproject.toml — Ghostclaw Logfire Plugin
 
 [build-system]
 requires = ["setuptools>=61.0", "wheel"]
 build-backend = "setuptools.build_meta"
 
 [project]
-name = "ghostclaw-plugin-bandit"
+name = "ghostclaw-plugin-logfire"
 version = "0.1.0"
-description = "Ghostclaw plugin integrating Bandit Python security scanner"
+description = "Ghostclaw plugin for analyzing Pydantic Logfire observability integration"
 readme = "README.md"
 requires-python = ">=3.10"
 license = {text = "MIT"}
 authors = [{name="Ghostclaw Team", email="team@ghostclaw.ai"}]
-keywords = ["ghostclaw", "plugin", "bandit", "security", "static-analysis"]
+keywords = ["ghostclaw", "plugin", "logfire", "observability", "pydantic", "opentelemetry"]
 classifiers = [
     "Development Status :: 3 - Alpha",
     "Intended Audience :: Developers",
     "License :: OSI Approved :: MIT License",
     "Programming Language :: Python :: 3",
-    "Programming Language :: Python :: 3.9",
     "Programming Language :: Python :: 3.10",
     "Programming Language :: Python :: 3.11",
-    "Topic :: Security",
+    "Programming Language :: Python :: 3.12",
+    "Topic :: Software Development :: Testing",
+    "Topic :: System :: Monitoring",
 ]
 dependencies = [
     "ghostclaw>=0.2.1b0",
-    "bandit>=1.7.0",
 ]
 
 [project.optional-dependencies]
@@ -35,9 +35,12 @@ dev = [
     "black",
     "ruff",
 ]
+logfire = [
+    "logfire>=2.0.0",
+]
 
 [project.entry-points."ghostclaw.plugins"]
-bandit = "ghostclaw_plugin_bandit:BanditPlugin"
+logfire = "ghostclaw_plugin_logfire:LogfirePlugin"
 
 [tool.setuptools]
 package-dir = {"" = "src"}
@@ -47,7 +50,7 @@ where = ["src"]
 
 [tool.black]
 line-length = 88
-target-version = ["py39"]
+target-version = ["py310"]
 
 [tool.ruff]
 line-length = 88

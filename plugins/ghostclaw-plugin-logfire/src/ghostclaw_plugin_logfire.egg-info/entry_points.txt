@@ -1,0 +1,2 @@
+[ghostclaw.plugins]
+logfire = ghostclaw_plugin_logfire:LogfirePlugin
